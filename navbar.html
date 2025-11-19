@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Navbar</title>
+
+<!-- ===== CSS Styling ===== -->
+<style>
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  body {
+    height: 2000px; /* To enable scrolling */
+    background: linear-gradient(135deg, #00aced, #0077cc);
+  }
+
+  /* ===== NAVBAR STYLING ===== */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.4s ease;
+    z-index: 999;
+  }
+
+  /* Logo */
+  .logo {
+    font-size: 1.6rem;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* Nav links */
+  .nav-links {
+    display: flex;
+    list-style: none;
+  }
+
+  .nav-links li {
+    margin: 0 20px;
+    position: relative;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.05rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  /* Hover underline effect */
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0%;
+    height: 2px;
+    background-color: #ffe600;
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  .nav-links a:hover {
+    color: #ffe600;
+  }
+
+  /* ===== Navbar on Scroll ===== */
+  .scrolled {
+    background: linear-gradient(90deg, #fff, #d9f0ff);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 10px 60px;
+  }
+
+  .scrolled .logo {
+    color: #0077cc;
+  }
+
+  .scrolled .nav-links a {
+    color: #0077cc;
+  }
+
+  .scrolled .nav-links a:hover {
+    color: #00aced;
+  }
+
+  .scrolled .nav-links a::after {
+    background-color: #00aced;
+  }
+
+  /* ===== Content Sections ===== */
+  section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 3rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+
+  #home {
+    background: linear-gradient(120deg, #00aced, #0077cc);
+  }
+
+  #about {
+    background: linear-gradient(120deg, #6a11cb, #2575fc);
+  }
+
+  #services {
+    background: linear-gradient(120deg, #ff6a00, #ee0979);
+  }
+
+  #contact {
+    background: linear-gradient(120deg, #00c6ff, #0072ff);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    nav {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 15px 30px;
+    }
+
+    .nav-links {
+      flex-direction: column;
+      width: 100%;
+      display: none;
+    }
+
+    .nav-links.active {
+      display: flex;
+    }
+
+    .nav-links li {
+      margin: 10px 0;
+    }
+
+    .menu-toggle {
+      display: block;
+      cursor: pointer;
+      font-size: 1.8rem;
+      color: white;
+    }
+
+    .scrolled .menu-toggle {
+      color: #0077cc;
+    }
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+</style>
+</head>
+
+<body>
+
+  <!-- ===== Navigation Bar ===== -->
+  <nav id="navbar">
+    <div class="logo">MyBrand</div>
+
+    <div class="menu-toggle" id="menu-toggle">&#9776;</div>
+
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== Page Sections ===== -->
+  <section id="home">Home</section>
+  <section id="about">About</section>
+  <section id="services">Services</section>
+  <section id="contact">Contact</section>
+
+  <!-- ===== JavaScript for Interactivity ===== -->
+  <script>
+    const navbar = document.getElementById('navbar');
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    // Change navbar color on scroll
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Mobile menu toggle
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+
+</body>
+</html>
